@@ -6,18 +6,22 @@ import java.util.concurrent.Semaphore;
 public class MyThread extends Thread{
 
     private int id;
-    private static volatile Semaphore Sectiune_critica;
     MyThread(int valueofid){
         this.id = valueofid;
     }
     public void run(){
         while (Main.i<Main.ID_PREZENTA){
-            Sectiune_critica.acquireUninterruptibly(1);
+            Main.Sectiune_critica.acquireUninterruptibly(1);
             //BEGIN - Sectiune critica
             Main.i++;
-            System.out.println("Threadul "+id+" am incrementat i cu 1");
+            System.out.println("Threadul "+id+" am incrementat i cu 1, i="+Main.i);
             //END - Sectiune critica
-            Sectiune_critica.release(1);
+            Main.Sectiune_critica.release(1);
+            try {
+                sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
