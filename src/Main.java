@@ -22,5 +22,6 @@ public class Main {
                 e.printStackTrace();
             }
         }
+        System.out.println("\nValoarea finala a lui i este "+i);
     }
 }
